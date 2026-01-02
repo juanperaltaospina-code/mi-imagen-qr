@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visualización de Imagen</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    img{
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      margin-top: 15px;
+    }
+    .msg{
+      margin-top: 10px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Imagen desde código QR</h2>
+
+  <img id="foto" src="" alt="Imagen">
+  <p id="msg" class="msg"></p>
+
+  <script>
+    // Imagen por defecto
+    const IMAGEN_POR_DEFECTO = "prube.jpg";
+
+    // Leer parámetro ?img=
+    const params = new URLSearchParams(window.location.search);
+    const imgParam = params.get("img");
+
+    // Elegir imagen
+    const imagenFinal = imgParam ? imgParam : IMAGEN_POR_DEFECTO;
+
+    const foto = document.getElementById("foto");
+    const msg  = document.getElementById("msg");
+
+    foto.src = imagenFinal;
+    msg.textContent = "Mostrando imagen: " + imagenFinal;
+
+    // Manejo de error si la imagen no existe
+    foto.onerror = function () {
+      msg.textContent = "❌ No se pudo cargar la imagen: " + imagenFinal;
+      foto.style.display = "none";
+    };
+  </script>
+</body>
+</html>
