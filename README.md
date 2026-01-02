@@ -1,1 +1,0 @@
-# mi-imagen-qr
